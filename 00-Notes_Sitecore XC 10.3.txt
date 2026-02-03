@@ -1,0 +1,15 @@
+dotnet add package MSBuild.Microsoft.VisualStudio.Web.targets --version 14.0.0.3
+Option 2: Manual download (no NuGet CLI) -- refer: 03-downloadMicrosoft.Web.XmlTransform-dll.PNG
+https://nuget.info/packages/MSBuild.Microsoft.VisualStudio.Web.targets/14.0.0.3
+------------------------------------------------------------------------------------------------
+-----------------Create a secret client certificate---------------------------------------------
+$bytes = New-Object Byte[] 32
+$rand = [System.Security.Cryptography.RandomNumberGenerator]::Create()
+$rand.GetBytes($bytes)
+$rand.Dispose()
+$newClientSecret = [System.Convert]::ToBase64String($bytes)
+Write-Host "New Client Secret:" -ForegroundColor Cyan -NoNewline
+Write-Host $newClientSecret -ForegroundColor Yellow
+------------------------------------------------------------------------------------------------
+New Client Secret:WsGZZ/WD+UaJwrj18JW0O8DtLnYPbvepA1LuVrghQgk=
+------------------------------------------------------------------------------------------------
