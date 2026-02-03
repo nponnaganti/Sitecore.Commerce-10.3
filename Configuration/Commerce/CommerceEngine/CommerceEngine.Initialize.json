@@ -1,0 +1,199 @@
+﻿{
+    "Parameters": {
+        "SitecoreIdentityServerUrl": {
+            "Type": "string",
+            "Description": "The Sitecore Identity Server Url.",
+            "DefaultValue": ""
+        },
+        "CommerceInstallRoot": {
+            "Type": "string",
+            "Description": "The root path of commerce services.",
+            "DefaultValue": ""
+        },
+        "CommerceShopsServicesPort": {
+            "Type": "string",
+            "Description": "Commerce Shops Services port",
+            "DefaultValue": ""
+        },
+        "SitecoreAdminAccount": {
+            "Type": "psobject",
+            "Description": "Sitecore Admin account.",
+            "DefaultValue": ""
+        },
+        "Environments": {
+            "Type": "string[]",
+            "Description": "List of environments to initialize.",
+            "DefaultValue": ""
+        },
+        "DeploySampleData": {
+            "Type": "bool",
+            "Description": "Whether to deploy sample data.",
+            "DefaultValue": true
+        },
+        "MinionEnvironments": {
+            "Type": "string[]",
+            "Description": "List of minion environments to initialize.",
+            "DefaultValue": ""
+        },
+        "CommerceServicesPostfix": {
+            "Type": "string",
+            "Description": "The Commerce Engine postfix for services names",
+            "DefaultValue": ""
+        },
+        "CommerceServicesHostPostfix": {
+            "Type": "string",
+            "Description": "The postfix for Commerce Engine services host names",
+            "DefaultValue": ""
+        },
+        "EngineMinionsUrl": {
+            "Type": "string",
+            "Description": "The url for Minions",
+            "DefaultValue": ""
+        },
+        "EngineAuthoringUrl": {
+            "Type": "string",
+            "Description": "The url for Authoring",
+            "DefaultValue": ""
+    },
+    "CommerceEngineConnectClientId": {
+      "Type": "string",
+      "Description": "The Commerce Engine Connect Client Id for the Sitecore Identity Server",
+      "DefaultValue": ""
+        }
+    },
+    "Variables": {
+        "Sitecore.AdminAccount": "[parameter('SitecoreAdminAccount')]",
+        "SitecoreIdentityServerGetTokenUrl": "[concat(parameter('SitecoreIdentityServerUrl'), '/connect/token')]",
+        "CommerceShops": "[concat('CommerceShops_', parameter('CommerceServicesPostfix'))]",
+        "CommerceAuthoring": "[concat('CommerceAuthoring_', parameter('CommerceServicesPostfix'))]",
+        "CommerceMinions": "[concat('CommerceMinions_', parameter('CommerceServicesPostfix'))]",
+        "CommerceShopsPhysicalPath": "[joinpath(parameter('CommerceInstallRoot'),  variable('CommerceShops'))]",
+        "CommerceAuthoringPhysicalPath": "[joinpath(parameter('CommerceInstallRoot'),  variable('CommerceAuthoring'))]",
+        "CommerceMinionsPhysicalPath": "[joinpath(parameter('CommerceInstallRoot'),  variable('CommerceMinions'))]",
+        "Engine.MinionsUrl": "[parameter('EngineMinionsUrl')]",
+        "Engine.AuthoringUrl": "[parameter('EngineAuthoringUrl')]",
+        "UrlCommerceOpsServicesBootstrap": "[concat(variable('Engine.AuthoringUrl'), '/commerceops/Bootstrap()'))]",
+        "InitializeParam": "/commerceops/InitializeEnvironment()",
+        "UrlInitializeEnvironment": "[concat(variable('Engine.AuthoringUrl'), variable('InitializeParam')))]",
+        "EnsureSyncDefaultContentPathsParam": "/commerceops/EnsureSyncDefaultContentPaths()",
+        "UrlEnsureSyncDefaultContentPaths": "[concat(variable('Engine.AuthoringUrl'), variable('EnsureSyncDefaultContentPathsParam')))]",
+        "UrlCheckCommandStatus": "[concat(variable('Engine.AuthoringUrl'), '/commerceops/CheckCommandStatus(taskId=taskIdValue)'))]",
+        "UrlCheckRunMinionCommandStatus": "[concat(variable('Engine.MinionsUrl'), '/commerceops/CheckCommandStatus(taskId=taskIdValue)'))]",
+        "UrlRunMinion": "[concat(variable('Engine.MinionsUrl'), '/commerceops/RunMinion()')]"
+    },
+    "Modules": [
+        "InitializeCommerce"
+    ],
+    "Tasks": {
+        "StopWebAppPoolMinions": {
+            "Type": "ManageAppPool",
+            "Params": {
+                "Name": "[variable('CommerceMinions')]",
+                "Action": "stop"
+            }
+        },
+        "EnsureStopWebAppPoolMinions": {
+            "Type": "ManageAppPool",
+            "Params": {
+                "Name": "[variable('CommerceMinions')]",
+                "Action": "stop",
+                "Timeout": 60
+            }
+        },
+        "DisableCsrfValidation": {
+            "Type": "DisableCsrfValidation",
+            "Params": {
+                "CommerceServicesPathCollection": [
+                    "[variable('CommerceShopsPhysicalPath')]",
+                    "[variable('CommerceAuthoringPhysicalPath')]",
+                    "[variable('CommerceMinionsPhysicalPath')]"
+                ]
+            }
+        },
+        "UpdateCeConnectClientId": {
+            "Type": "UpdateCeConnectClientId",
+            "Params": {
+                "CommerceServicesPathCollection": [
+                    "[variable('CommerceShopsPhysicalPath')]",
+                    "[variable('CommerceAuthoringPhysicalPath')]",
+                    "[variable('CommerceMinionsPhysicalPath')]"
+                ],
+                "CommerceEngineConnectClientId": "[parameter('CommerceEngineConnectClientId')]"
+            }
+        },
+        "StartWebAppPoolMinions": {
+            "Type": "ManageAppPool",
+            "Params": {
+                "Name": "[variable('CommerceMinions')]",
+                "Action": "start"
+            }
+        },
+        "GetIdServerToken": {
+            "Type": "GetIdServerToken",
+            "Params": {
+                "SitecoreAdminAccount": "[variable('Sitecore.AdminAccount')]",
+                "UrlIdentityServerGetToken": "[variable('SitecoreIdentityServerGetTokenUrl')]"
+            }
+        },
+        "BootStrapCommerceServices": {
+            "Type": "BootStrapCommerceServices",
+            "Params": {
+                "UrlCommerceOpsServicesBootstrap": "[variable('UrlCommerceOpsServicesBootstrap')]"
+            }
+        },
+        "EnsureSyncDefaultContentPaths": {
+            "Type": "EnsureSyncDefaultContentPaths",
+            "Params": {
+                "UrlEnsureSyncDefaultContentPaths": "[variable('UrlEnsureSyncDefaultContentPaths')]",
+                "UrlCheckCommandStatus": "[variable('UrlCheckCommandStatus')]",
+                "Environments": "[parameter('Environments')]"
+            }
+        },
+        "InitializeCommerceServices": {
+            "Type": "InitializeCommerceServices",
+            "Params": {
+                "UrlInitializeEnvironment": "[variable('UrlInitializeEnvironment')]",
+                "UrlCheckCommandStatus": "[variable('UrlCheckCommandStatus')]",
+                "Environments": "[parameter('Environments')]",
+                "DeploySampleData":"[parameter('DeploySampleData')]"
+            }
+        },
+        "IndexCatalogItems": {
+            "Type": "IndexEngineItems",
+            "Params": {
+                "ListToWatch": "Catalogs",
+                "UrlRunMinion": "[variable('UrlRunMinion')]",
+                "MinionEnvironments": "[parameter('MinionEnvironments')]",
+                "UrlCheckCommandStatus": "[variable('UrlCheckRunMinionCommandStatus')]"
+            }
+        },
+        "IndexPriceCardSnapshots": {
+            "Type": "IndexEngineItems",
+            "Params": {
+                "ListToWatch": "PriceCards",
+                "UrlRunMinion": "[variable('UrlRunMinion')]",
+                "MinionEnvironments": "[parameter('MinionEnvironments')]",
+                "UrlCheckCommandStatus": "[variable('UrlCheckRunMinionCommandStatus')]"
+            }
+        },
+        "IndexPromotions": {
+            "Type": "IndexEngineItems",
+            "Params": {
+                "ListToWatch":"Promotions",
+                "UrlRunMinion": "[variable('UrlRunMinion')]",
+                "MinionEnvironments": "[parameter('MinionEnvironments')]",
+                "UrlCheckCommandStatus": "[variable('UrlCheckRunMinionCommandStatus')]"
+            }
+        },
+        "EnableCsrfValidation": {
+            "Type": "EnableCsrfValidation",
+            "Params": {
+                "CommerceServicesPathCollection": [
+                    "[variable('CommerceShopsPhysicalPath')]",
+                    "[variable('CommerceAuthoringPhysicalPath')]",
+                    "[variable('CommerceMinionsPhysicalPath')]"
+                ]
+            }
+        }
+    }
+}

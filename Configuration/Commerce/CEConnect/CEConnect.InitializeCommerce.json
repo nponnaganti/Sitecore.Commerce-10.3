@@ -1,0 +1,108 @@
+﻿{
+  "Parameters": {
+    "EngineConnectIncludeDir": {
+      "Type": "string",
+      "Description": "The path to the Engine Connect App_Config directory",
+      "DefaultValue": ""
+    },
+    "CommerceInstallRoot": {
+      "Type": "string",
+      "Description": "The root path of commerce services.",
+      "DefaultValue": ""
+    },
+    "CommerceServicesPostfix": {
+      "Type": "string",
+      "Description": "The Commerce Engine postfix for services names",
+      "DefaultValue": ""
+    },
+    "CommerceServicesHostPostfix": {
+      "Type": "string",
+      "Description": "The postfix for Commerce Engine services host names",
+      "DefaultValue": ""
+    },
+    "CommerceAuthoringServicesPort": {
+      "Type": "string",
+      "Description": "Commerce Authoring Services port",
+      "DefaultValue": ""
+    },
+    "CommerceMinionsServicesPort": {
+      "Type": "string",
+      "Description": "Commerce Minions Services port",
+      "DefaultValue": ""
+    },
+    "SitecoreIdentityServerUrl": {
+      "Type": "string",
+      "Description": "Sitecore IDServer url",
+      "DefaultValue": ""
+    },
+    "CommerceEngineConnectClientId": {
+      "Type": "string",
+      "Description": "Commerce Engine Connect Client Id for Sitecore IDServer",
+      "DefaultValue": ""
+    },
+    "CommerceEngineConnectClientSecret": {
+      "Type": "string",
+      "Description": "Commerce Engine Connect Client Secret for Sitecore IDServer",
+      "DefaultValue": ""
+    },
+    "RedisHost": {
+      "Type": "string",
+      "Description": "The host name where Redis is hosted.",
+      "DefaultValue": ""
+    },
+    "RedisPort": {
+      "Type": "string",
+      "Description": "The port number on which Redis is running.",
+      "DefaultValue": ""
+    }
+  },
+  "Variables": {
+    "EngineConnect.IncludeDir": "[parameter('EngineConnectIncludeDir')]",
+    "CE.ClientSecret": "[parameter('CommerceEngineConnectClientSecret')]",
+    "RedisConnection": "[concat(parameter('RedisHost'), concat(':', parameter('RedisPort')))]"
+  },
+  "Modules": [
+    "InitializeCommerce"
+  ],
+  "Tasks": {
+    "CreateCustomPatch": {
+      "Type": "CreateCustomPatch",
+      "Params": {
+        "EngineConnectIncludeDir": "[variable('EngineConnect.IncludeDir')]"
+      }
+    },
+    "UpdateRedisConnection": {
+      "Type": "UpdateRedisConnection",
+      "Params": {
+        "EngineConnectIncludeDir": "[variable('EngineConnect.IncludeDir')]",
+        "RedisConnection": "[variable('RedisConnection')]"
+      }
+    },
+    "UpdateHostnames": {
+      "Skip": "[not(parameter('CommerceServicesHostPostfix'))]",
+      "Type": "UpdateHostnames",
+      "Params": {
+        "EngineConnectIncludeDir": "[variable('EngineConnect.IncludeDir')]",
+        "CommerceServicesHostPostfix": "[parameter('CommerceServicesHostPostfix')]"
+      }
+    },
+    "UpdateIdServerSettings": {
+      "Type": "UpdateIdServerSettings",
+      "Params": {
+        "EngineConnectIncludeDir": "[variable('EngineConnect.IncludeDir')]",
+        "SitecoreIdentityServerUrl": "[parameter('SitecoreIdentityServerUrl')]",
+        "CommerceEngineConnectClientId": "[parameter('CommerceEngineConnectClientId')]",
+        "CommerceEngineConnectClientSecret": "[variable('CE.ClientSecret')]"
+      }
+    },
+    "UpdatePorts": {
+      "Skip": "[parameter('CommerceServicesHostPostfix')]",
+      "Type": "UpdatePorts",
+      "Params": {
+        "EngineConnectIncludeDir": "[variable('EngineConnect.IncludeDir')]",
+        "CommerceAuthoringServicesPort": "[parameter('CommerceAuthoringServicesPort')]",
+        "CommerceMinionsServicesPort": "[parameter('CommerceMinionsServicesPort')]"
+      }
+    }
+  }
+}

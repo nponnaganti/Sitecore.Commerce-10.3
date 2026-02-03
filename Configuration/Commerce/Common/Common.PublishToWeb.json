@@ -1,0 +1,41 @@
+{
+  "Parameters": {
+    "BaseUrl": {
+      "Type": "string",
+      "Description": "The utility pages base url.",
+      "DefaultValue": ""
+    },
+    "SkipTask": {
+      "Type": "bool",
+      "Description": "Boolean value to indicate whether task should be skipped or not.",
+      "DefaultValue": false
+    }
+  },
+  "Variables": {
+    "Base.Url": "[parameter('BaseUrl')]",
+    "Publish.Uri": "[concat(variable('Base.Url'), '/Publish.aspx')]",
+    "Skip.Task": "[parameter('SkipTask')]"
+  },
+  "Register": {
+    "Tasks" : {
+      "Sleep": "Start-Sleep"
+    }
+  },
+  "Tasks": {
+    "Sleep": {
+      "Skip": "[variable('Skip.Task')]",
+      "Type": "Sleep",
+      "Params": {
+        "Milliseconds": "60000"
+      }
+    },
+    "PublishToWeb": {
+      "Skip": "[variable('Skip.Task')]",
+      "Type": "WebRequest",
+      "Params": {
+        "Uri": "[variable('Publish.Uri')]",
+        "RequestTimeout": "720000"
+      }
+    }
+  }
+}

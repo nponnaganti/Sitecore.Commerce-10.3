@@ -1,0 +1,661 @@
+﻿{
+  "Parameters": {
+    "SiteHostHeaderName": {
+      "Type": "string",
+      "Description": "The host header name of the site to be deployed.",
+      "DefaultValue": ""
+    },
+    "EnvironmentsPrefix": {
+      "Type": "string",
+      "Description": "The prefix for the Commerce environments names.",
+      "DefaultValue": ""
+    },
+    "SitecoreIdentityServerUrl": {
+      "Type": "string",
+      "Description": "Sitecore Identity Server Url.",
+      "DefaultValue": ""
+    },
+    "SolrUrl": {
+      "Type": "string",
+      "Description": "The Solr instance url.",
+      "DefaultValue": ""
+    },
+    "SearchIndexPrefix": {
+      "Type": "string",
+      "DefaultValue": "",
+      "Description": "The search index prefix."
+    },
+    "StorefrontIndexPrefix": {
+      "Type": "string",
+      "DefaultValue": "",
+      "Description": "The storefront index prefix."
+    },    
+    "CommerceShopsServicesPort": {
+      "Type": "string",
+      "Description": "CommerceShops Services Port",
+      "DefaultValue": ""
+    },
+    "CommerceAuthoringServicesPort": {
+      "Type": "string",
+      "Description": "CommerceAuthoring Services Port",
+      "DefaultValue": ""
+    },
+    "CommerceMinionsServicesPort": {
+      "Type": "string",
+      "Description": "CommerceMinions Services Port",
+      "DefaultValue": ""
+    },
+    "CommerceServicesDbServer": {
+      "Type": "string",
+      "Description": "The Commerce Engine database server name.",
+      "DefaultValue": ""
+    },
+    "SitecoreCoreDbName": {
+      "Type": "string",
+      "Description": "The Sitecore Core database name.",
+      "DefaultValue": ""
+    },
+    "CommerceServicesDbName": {
+      "Type": "string",
+      "Description": "Commerce Services database name",
+      "DefaultValue": ""
+    },
+    "CommerceServicesGlobalDbName": {
+      "Type": "string",
+      "Description": "The Commerce Engine global database name",
+      "DefaultValue": ""
+    },
+    "CommerceServicesArchiveDbName": {
+      "Type": "string",
+      "Description": "The Commerce Engine Archive database name.",
+      "DefaultValue": ""
+    },
+    "CommerceServicesHostPostfix": {
+      "Type": "string",
+      "Description": "The postfix for Commerce Engine services host names",
+      "DefaultValue": ""
+    },
+    "SitecoreDomain": {
+      "Type": "string",
+      "Description": "Sitecore Domain",
+      "DefaultValue": ""
+    },
+    "SitecoreUsername": {
+      "Type": "string",
+      "Description": "Sitecore Admin Username",
+      "DefaultValue": ""
+    },
+    "SitecoreUserPassword": {
+      "Type": "string",
+      "Description": "Sitecore Admin Password",
+      "DefaultValue": ""
+    },
+    "SitecoreDbServer": {
+      "Type": "string",
+      "Description": "The Sitecore database server name.",
+      "DefaultValue": ".\\SQLSERVER"
+    },
+    "SqlAdminUser": {
+      "Type": "string",
+      "Description": "The Sql admin user.",
+      "DefaultValue": ""
+    },
+    "SqlAdminPassword": {
+      "Type": "string",
+      "Description": "The Sql admin password.",
+      "DefaultValue": ""
+    },
+    "UserDomain": {
+      "Type": "string",
+      "Description": "User Domain for Commerce Services App Pool",
+      "DefaultValue": ""
+    },
+    "UserName": {
+      "Type": "string",
+      "Description": "User Name for Commerce Services App Pool",
+      "DefaultValue": ""
+    },
+    "UserPassword": {
+      "Type": "string",
+      "Description": "User Password for Commerce Services App Pool",
+      "DefaultValue": ""
+    },
+    "RedisInstanceName": {
+      "Type": "string",
+      "Description": "Redis service instance name.",
+      "DefaultValue": ""
+    },
+    "CommerceEngineWdpFullPath": {
+      "Type": "string",
+      "Description": "Commerce Engine service wdp package full path.",
+      "DefaultValue": ""
+    },
+    "BizFxPort": {
+      "Type": "string",
+      "Description": "Sitecore BizFx Server port",
+      "DefaultValue": ""
+    },
+    "EnvironmentsGuids": {
+      "Type": "string[]",
+      "Description": "List of environments guids.",
+      "DefaultValue": "[]"
+    },
+    "RedisCliPath": {
+      "Type": "string",
+      "Description": "Path to redis-cli executable.",
+      "DefaultValue": ""
+    },
+    "RedisHost": {
+      "Type": "string",
+      "Description": "The host name where Redis is hosted.",
+      "DefaultValue": ""
+    },
+    "RedisPort": {
+      "Type": "string",
+      "Description": "The port number on which Redis is running.",
+      "DefaultValue": ""
+    },
+    "BraintreeMerchantId": {
+      "Type": "string",
+      "Description": "Braintree MerchantId",
+      "DefaultValue": ""
+    },
+    "BraintreePublicKey": {
+      "Type": "string",
+      "Description": "Braintree PublicKey",
+      "DefaultValue": ""
+    },
+    "BraintreePrivateKey": {
+      "Type": "string",
+      "Description": "Braintree PrivateKey",
+      "DefaultValue": ""
+    },
+    "BraintreeEnvironment": {
+      "Type": "string",
+      "Description": "Braintree Environment",
+      "DefaultValue": ""
+    },
+    "CommerceEngineConnectClientId": {
+      "Type": "string",
+      "Reference": "CommerceEngineConnectClientId"
+    },
+    "CommerceEngine-Pre:CommerceServicesDbServer": {
+      "Type": "string",
+      "Reference": "CommerceServicesDbServer"
+    },
+    "CommerceEngine-Pre:SitecoreCoreDbName": {
+      "Type": "string",
+      "Reference": "SitecoreCoreDbName"
+    },
+    "CommerceEngine-Pre:CommerceServicesDbName": {
+      "Type": "string",
+      "Reference": "CommerceServicesDbName"
+    },
+    "CommerceEngine-Pre:CommerceServicesGlobalDbName": {
+      "Type": "string",
+      "Reference": "CommerceServicesGlobalDbName"
+    },
+    "CommerceEngine-Pre:CommerceServicesArchiveDbName": {
+      "Type": "string",
+      "Reference": "CommerceServicesArchiveDbName"
+    },
+    "CommerceEngine-Pre:CommerceServicesHostPostfix": {
+      "Type": "string",
+      "Reference": "CommerceServicesHostPostfix"
+    },
+    "CommerceEngine-Pre:SitecoreDbServer": {
+      "Type": "string",
+      "Reference": "SitecoreDbServer"
+    },
+    "CommerceEngine-Pre:SqlAdminUser": {
+      "Type": "string",
+      "Reference": "SqlAdminUser"
+    },
+    "CommerceEngine-Pre:SqlAdminPassword": {
+      "Type": "string",
+      "Reference": "SqlAdminPassword"
+    },
+    "CommerceEngine-Pre:UserDomain": {
+      "Type": "string",
+      "Reference": "UserDomain"
+    },
+    "CommerceEngine-Pre:UserName": {
+      "Type": "string",
+      "Reference": "UserName"
+    },
+    "CommerceEngine-Pre:UserPassword": {
+      "Type": "string",
+      "Reference": "UserPassword"
+    },
+    "CommerceEngine-Pre:EnvironmentsGuids": {
+      "Type": "string[]",
+      "Reference": "EnvironmentsGuids"
+    },
+    "CommerceEngine-Pre:RedisCliPath": {
+      "Type": "string",
+      "Reference": "RedisCliPath"
+    },
+    "CommerceEngine-Pre:RedisHost": {
+      "Type": "string",
+      "Reference": "RedisHost"
+    },
+    "CommerceEngine-Pre:RedisPort": {
+      "Type": "string",
+      "Reference": "RedisPort"
+    },    
+    "CommerceEngine-Shops:CommerceEngineWdpFullPath": {
+      "Type": "string",
+      "Reference": "CommerceEngineWdpFullPath"
+    },
+    "CommerceEngine-Shops:SitecoreDomain": {
+      "Type": "string",
+      "Reference": "SitecoreDomain"
+    },
+    "CommerceEngine-Shops:SitecoreUsername": {
+      "Type": "string",
+      "Reference": "SitecoreUsername"
+    },
+    "CommerceEngine-Shops:SitecoreUserPassword": {
+      "Type": "string",
+      "Reference": "SitecoreUserPassword"
+    },
+    "CommerceEngine-Shops:SiteHostHeaderName": {
+      "Type": "string",
+      "Reference": "SiteHostHeaderName"
+    },
+    "CommerceEngine-Shops:CommerceServicesHostPostfix": {
+      "Type": "string",
+      "Reference": "CommerceServicesHostPostfix"
+    },
+    "CommerceEngine-Shops:Port": {
+      "Type": "string",
+      "Reference": "CommerceShopsServicesPort"
+    },
+    "CommerceEngine-Shops:SitecoreIdentityServerUrl": {
+      "Type": "string",
+      "Reference": "SitecoreIdentityServerUrl"
+    },
+    "CommerceEngine-Shops:CommerceEngineConnectClientId": {
+      "Type": "string",
+      "Reference": "CommerceEngineConnectClientId"
+    },
+    "CommerceEngine-Shops:BizFxPort": {
+      "Type": "string",
+      "Reference": "BizFxPort"
+    },
+    "CommerceEngine-Shops:CommerceServicesDbServer": {
+      "Type": "string",
+      "Reference": "CommerceServicesDbServer"
+    },
+    "CommerceEngine-Shops:SqlAdminUser": {
+      "Type": "string",
+      "Reference": "SqlAdminUser"
+    },
+    "CommerceEngine-Shops:SqlAdminPassword": {
+      "Type": "string",
+      "Reference": "SqlAdminPassword"
+    },
+    "CommerceEngine-Shops:CommerceServicesDbName": {
+      "Type": "string",
+      "Reference": "CommerceServicesDbName"
+    },
+    "CommerceEngine-Shops:CommerceServicesGlobalDbName": {
+      "Type": "string",
+      "Reference": "CommerceServicesGlobalDbName"
+    },
+    "CommerceEngine-Shops:CommerceServicesArchiveDbName": {
+      "Type": "string",
+      "Reference": "CommerceServicesArchiveDbName"
+    },
+    "CommerceEngine-Shops:UserDomain": {
+      "Type": "string",
+      "Reference": "UserDomain"
+    },
+    "CommerceEngine-Shops:UserName": {
+      "Type": "string",
+      "Reference": "UserName"
+    },
+    "CommerceEngine-Shops:UserPassword": {
+      "Type": "string",
+      "Reference": "UserPassword"
+    },
+    "CommerceEngine-Shops:SolrUrl": {
+      "Type": "string",
+      "Reference": "SolrUrl"
+    },
+    "CommerceEngine-Shops:SearchIndexPrefix": {
+      "Type": "string",
+      "Reference": "SearchIndexPrefix"
+    },
+    "CommerceEngine-Shops:StorefrontIndexPrefix": {
+      "Type": "string",
+      "Reference": "StorefrontIndexPrefix"
+    },
+    "CommerceEngine-Shops:BraintreeMerchantId": {
+      "Type": "string",
+      "Reference": "BraintreeMerchantId"
+    },
+    "CommerceEngine-Shops:BraintreePublicKey": {
+      "Type": "string",
+      "Reference": "BraintreePublicKey"
+    },
+    "CommerceEngine-Shops:BraintreePrivateKey": {
+      "Type": "string",
+      "Reference": "BraintreePrivateKey"
+    },
+    "CommerceEngine-Shops:BraintreeEnvironment": {
+      "Type": "string",
+      "Reference": "BraintreeEnvironment"
+    },
+    "CommerceEngine-Shops:RedisHost": {
+      "Type": "string",
+      "Reference": "RedisHost"
+    },
+    "CommerceEngine-Shops:RedisPort": {
+      "Type": "string",
+      "Reference": "RedisPort"
+    },
+    "CommerceEngine-Shops:RedisInstanceName": {
+      "Type": "string",
+      "Reference": "RedisInstanceName"
+    },
+    "CommerceEngine-Authoring:CommerceEngineWdpFullPath": {
+      "Type": "string",
+      "Reference": "CommerceEngineWdpFullPath"
+    },
+    "CommerceEngine-Authoring:SiteHostHeaderName": {
+      "Type": "string",
+      "Reference": "SiteHostHeaderName"
+    },
+    "CommerceEngine-Authoring:SitecoreDomain": {
+      "Type": "string",
+      "Reference": "SitecoreDomain"
+    },
+    "CommerceEngine-Authoring:SitecoreUsername": {
+      "Type": "string",
+      "Reference": "SitecoreUsername"
+    },
+    "CommerceEngine-Authoring:SitecoreUserPassword": {
+      "Type": "string",
+      "Reference": "SitecoreUserPassword"
+    },
+    "CommerceEngine-Authoring:CommerceServicesHostPostfix": {
+      "Type": "string",
+      "Reference": "CommerceServicesHostPostfix"
+    },
+    "CommerceEngine-Authoring:Port": {
+      "Type": "string",
+      "Reference": "CommerceAuthoringServicesPort"
+    },
+    "CommerceEngine-Authoring:SitecoreIdentityServerUrl": {
+      "Type": "string",
+      "Reference": "SitecoreIdentityServerUrl"
+    },
+    "CommerceEngine-Authoring:CommerceEngineConnectClientId": {
+      "Type": "string",
+      "Reference": "CommerceEngineConnectClientId"
+    },
+    "CommerceEngine-Authoring:BizFxPort": {
+      "Type": "string",
+      "Reference": "BizFxPort"
+    },
+    "CommerceEngine-Authoring:CommerceServicesDbServer": {
+      "Type": "string",
+      "Reference": "CommerceServicesDbServer"
+    },
+    "CommerceEngine-Authoring:SqlAdminUser": {
+      "Type": "string",
+      "Reference": "SqlAdminUser"
+    },
+    "CommerceEngine-Authoring:SqlAdminPassword": {
+      "Type": "string",
+      "Reference": "SqlAdminPassword"
+    },
+    "CommerceEngine-Authoring:CommerceServicesDbName": {
+      "Type": "string",
+      "Reference": "CommerceServicesDbName"
+    },
+    "CommerceEngine-Authoring:CommerceServicesGlobalDbName": {
+      "Type": "string",
+      "Reference": "CommerceServicesGlobalDbName"
+    },
+    "CommerceEngine-Authoring:CommerceServicesArchiveDbName": {
+      "Type": "string",
+      "Reference": "CommerceServicesArchiveDbName"
+    },
+    "CommerceEngine-Authoring:UserDomain": {
+      "Type": "string",
+      "Reference": "UserDomain"
+    },
+    "CommerceEngine-Authoring:UserName": {
+      "Type": "string",
+      "Reference": "UserName"
+    },
+    "CommerceEngine-Authoring:UserPassword": {
+      "Type": "string",
+      "Reference": "UserPassword"
+    },
+    "CommerceEngine-Authoring:SolrUrl": {
+      "Type": "string",
+      "Reference": "SolrUrl"
+    },
+    "CommerceEngine-Authoring:SearchIndexPrefix": {
+      "Type": "string",
+      "Reference": "SearchIndexPrefix"
+    },
+    "CommerceEngine-Authoring:StorefrontIndexPrefix": {
+      "Type": "string",
+      "Reference": "StorefrontIndexPrefix"
+    },
+    "CommerceEngine-Authoring:BraintreeMerchantId": {
+      "Type": "string",
+      "Reference": "BraintreeMerchantId"
+    },
+    "CommerceEngine-Authoring:BraintreePublicKey": {
+      "Type": "string",
+      "Reference": "BraintreePublicKey"
+    },
+    "CommerceEngine-Authoring:BraintreePrivateKey": {
+      "Type": "string",
+      "Reference": "BraintreePrivateKey"
+    },
+    "CommerceEngine-Authoring:BraintreeEnvironment": {
+      "Type": "string",
+      "Reference": "BraintreeEnvironment"
+    },
+    "CommerceEngine-Authoring:RedisHost": {
+      "Type": "string",
+      "Reference": "RedisHost"
+    },
+    "CommerceEngine-Authoring:RedisPort": {
+      "Type": "string",
+      "Reference": "RedisPort"
+    },
+    "CommerceEngine-Authoring:RedisInstanceName": {
+      "Type": "string",
+      "Reference": "RedisInstanceName"
+    },
+    "CommerceEngine-Minions:CommerceEngineWdpFullPath": {
+      "Type": "string",
+      "Reference": "CommerceEngineWdpFullPath"
+    },
+    "CommerceEngine-Minions:SitecoreDomain": {
+      "Type": "string",
+      "Reference": "SitecoreDomain"
+    },
+    "CommerceEngine-Minions:SitecoreUsername": {
+      "Type": "string",
+      "Reference": "SitecoreUsername"
+    },
+    "CommerceEngine-Minions:SitecoreUserPassword": {
+      "Type": "string",
+      "Reference": "SitecoreUserPassword"
+    },
+    "CommerceEngine-Minions:SiteHostHeaderName": {
+      "Type": "string",
+      "Reference": "SiteHostHeaderName"
+    },
+    "CommerceEngine-Minions:CommerceServicesHostPostfix": {
+      "Type": "string",
+      "Reference": "CommerceServicesHostPostfix"
+    },
+    "CommerceEngine-Minions:Port": {
+      "Type": "string",
+      "Reference": "CommerceMinionsServicesPort"
+    },
+    "CommerceEngine-Minions:SitecoreIdentityServerUrl": {
+      "Type": "string",
+      "Reference": "SitecoreIdentityServerUrl"
+    },
+    "CommerceEngine-Minions:CommerceEngineConnectClientId": {
+      "Type": "string",
+      "Reference": "CommerceEngineConnectClientId"
+    },
+    "CommerceEngine-Minions:BizFxPort": {
+      "Type": "string",
+      "Reference": "BizFxPort"
+    },
+    "CommerceEngine-Minions:CommerceServicesDbServer": {
+      "Type": "string",
+      "Reference": "CommerceServicesDbServer"
+    },
+    "CommerceEngine-Minions:SqlAdminUser": {
+      "Type": "string",
+      "Reference": "SqlAdminUser"
+    },
+    "CommerceEngine-Minions:SqlAdminPassword": {
+      "Type": "string",
+      "Reference": "SqlAdminPassword"
+    },
+    "CommerceEngine-Minions:CommerceServicesDbName": {
+      "Type": "string",
+      "Reference": "CommerceServicesDbName"
+    },
+    "CommerceEngine-Minions:CommerceServicesGlobalDbName": {
+      "Type": "string",
+      "Reference": "CommerceServicesGlobalDbName"
+    },
+    "CommerceEngine-Minions:CommerceServicesArchiveDbName": {
+      "Type": "string",
+      "Reference": "CommerceServicesArchiveDbName"
+    },
+    "CommerceEngine-Minions:UserDomain": {
+      "Type": "string",
+      "Reference": "UserDomain"
+    },
+    "CommerceEngine-Minions:UserName": {
+      "Type": "string",
+      "Reference": "UserName"
+    },
+    "CommerceEngine-Minions:UserPassword": {
+      "Type": "string",
+      "Reference": "UserPassword"
+    },
+    "CommerceEngine-Minions:SolrUrl": {
+      "Type": "string",
+      "Reference": "SolrUrl"
+    },
+    "CommerceEngine-Minions:SearchIndexPrefix": {
+      "Type": "string",
+      "Reference": "SearchIndexPrefix"
+    },
+    "CommerceEngine-Minions:StorefrontIndexPrefix": {
+      "Type": "string",
+      "Reference": "StorefrontIndexPrefix"
+    },
+    "CommerceEngine-Minions:BraintreeMerchantId": {
+      "Type": "string",
+      "Reference": "BraintreeMerchantId"
+    },
+    "CommerceEngine-Minions:BraintreePublicKey": {
+      "Type": "string",
+      "Reference": "BraintreePublicKey"
+    },
+    "CommerceEngine-Minions:BraintreePrivateKey": {
+      "Type": "string",
+      "Reference": "BraintreePrivateKey"
+    },
+    "CommerceEngine-Minions:BraintreeEnvironment": {
+      "Type": "string",
+      "Reference": "BraintreeEnvironment"
+    },
+    "CommerceEngine-Minions:RedisHost": {
+      "Type": "string",
+      "Reference": "RedisHost"
+    },
+    "CommerceEngine-Minions:RedisPort": {
+      "Type": "string",
+      "Reference": "RedisPort"
+    },
+    "CommerceEngine-Minions:RedisInstanceName": {
+      "Type": "string",
+      "Reference": "RedisInstanceName"
+    },
+    "EngineShopsUrl": {
+      "Type": "string",
+      "Description": "The url for Shops",
+      "DefaultValue": ""
+    },
+    "EngineAuthoringUrl": {
+      "Type": "string",
+      "Description": "The url for Authoring",
+      "DefaultValue": ""
+    },
+    "EngineMinionsUrl": {
+      "Type": "string",
+      "Description": "The url for Minions",
+      "DefaultValue": ""
+    }
+  },
+  "Settings": {
+    "AutoRegisterExtensions": true
+  },
+  "Modules": [
+  ],
+  "Variables": {
+    "Engine.ShopsUrl": "[parameter('EngineShopsUrl')]",
+    "Engine.AuthoringUrl": "[parameter('EngineAuthoringUrl')]",
+    "Engine.MinionsUrl": "[parameter('EngineMinionsUrl')]",    
+
+    "CommerceEngine-Shops:Site.Name": "[concat('CommerceShops_', parameter('CommerceServicesPostfix'))]",
+    "CommerceEngine-Shops:Host.Prefix": "commerceshops",
+    "CommerceEngine-Shops:Environment.Name": "[concat(parameter('EnvironmentsPrefix'), 'Shops')]",
+    "CommerceEngine-Shops:Minion.Instance": "false",
+    "CommerceEngine-Shops:Engine.ShopsUrl": "[variable('Engine.ShopsUrl')]",
+    "CommerceEngine-Shops:Engine.AuthoringUrl": "[variable('Engine.AuthoringUrl')]",
+    "CommerceEngine-Shops:Engine.MinionsUrl": "[variable('Engine.MinionsUrl')]",
+
+    "CommerceEngine-Authoring:Site.Name": "[concat('CommerceAuthoring_', parameter('CommerceServicesPostfix'))]",
+    "CommerceEngine-Authoring:Host.Prefix": "commerceauthoring",
+    "CommerceEngine-Authoring:Environment.Name": "[concat(parameter('EnvironmentsPrefix'), 'Authoring')]",
+    "CommerceEngine-Authoring:Minion.Instance": "false",
+    "CommerceEngine-Authoring:Engine.ShopsUrl": "[variable('Engine.ShopsUrl')]",
+    "CommerceEngine-Authoring:Engine.AuthoringUrl": "[variable('Engine.AuthoringUrl')]",
+    "CommerceEngine-Authoring:Engine.MinionsUrl": "[variable('Engine.MinionsUrl')]",
+
+    "CommerceEngine-Minions:Site.Name": "[concat('CommerceMinions_', parameter('CommerceServicesPostfix'))]",
+    "CommerceEngine-Minions:Host.Prefix": "commerceminions",
+    "CommerceEngine-Minions:Environment.Name": "[concat(parameter('EnvironmentsPrefix'), 'Minions')]",
+    "CommerceEngine-Minions:Minion.Instance": "true",
+    "CommerceEngine-Minions:Engine.ShopsUrl": "[variable('Engine.ShopsUrl')]",
+    "CommerceEngine-Minions:Engine.AuthoringUrl": "[variable('Engine.AuthoringUrl')]",
+    "CommerceEngine-Minions:Engine.MinionsUrl": "[variable('Engine.MinionsUrl')]"
+  },
+  "Includes": {
+    "CommerceEngine-Pre": {
+      "Source": ".\\Configuration\\Commerce\\CommerceEngine\\CommerceEngine.Pre.json"
+    },    
+    "CommerceEngine-Shops": {
+      "Source": ".\\Configuration\\Commerce\\CommerceEngine\\CommerceEngine.Instance.Deploy.json"
+    },
+    "CommerceEngine-Authoring": {
+      "Source": ".\\Configuration\\Commerce\\CommerceEngine\\CommerceEngine.Instance.Deploy.json"
+    },
+    "CommerceEngine-Minions": {
+      "Source": ".\\Configuration\\Commerce\\CommerceEngine\\CommerceEngine.Instance.Deploy.json"
+    },
+    "CommerceEngine-Post": {
+      "Source": ".\\Configuration\\Commerce\\CommerceEngine\\CommerceEngine.Post.json"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "Parameters": {
+    "InstallDir": {
+      "Type": "string",
+      "Description": "Sitecore website path.",
+      "DefaultValue": ""
+    }
+  },
+  "Register": {
+    "Tasks": {
+      "RemoveItem": "Remove-Item"
+    }
+  },
+  "Tasks": {
+    "RemoveSiteUtilityFolder": {
+      "Description": "Removes Site Utilities content.",
+      "Type": "RemoveItem",
+      "Params": {
+        "Path": "[joinpath(parameter('InstallDir'), '\\SiteUtilityPages')]",
+        "Recurse": true,
+        "ErrorAction": "SilentlyContinue"
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "Parameters": {
+    "PackagePath": {
+      "Type": "string",
+      "Description": "The path to the SCWDP  to deploy.",
+      "DefaultValue": ""
+    },
+    "SiteName": {
+      "Type": "string",
+      "Description": "The name of the site to be deployed.",
+      "DefaultValue": ""
+    }
+  },
+  "Variables": {
+    "Package.Path": "[parameter('PackagePath')]"
+  },
+  "Settings": {
+    "AutoRegisterExtensions": true
+  },
+  "Tasks": {
+    "InstallWDPModuleNoDB": {
+      "Type": "WebDeploy",
+      "Params": {
+        "Verb": "Sync",
+        "Arguments": {
+          "Source": {
+            "Package": "[resolvepath(variable('Package.Path'))]"
+          },
+          "Dest": "Auto",
+          "EnableRule": "DoNotDeleteRule",
+          "SetParam": [
+            {
+              "Name": "Application Path",
+              "Value": "[parameter('SiteName')]"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

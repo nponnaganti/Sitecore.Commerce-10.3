@@ -1,0 +1,22 @@
+{
+  "Parameters": {
+    "FullPath": {
+      "Type": "string",
+      "Description": "The path to check.",
+      "DefaultValue": ""
+    }
+  },
+  "Variables": {
+    "Full.Path": "[parameter('FullPath')]"
+  },
+  "Tasks": {
+    "EnsurePath": {
+      "Type": "EnsurePath",
+      "Params": {
+        "Exists": [
+          "[variable('Full.Path')]"
+        ]
+      }
+    }
+  }
+}

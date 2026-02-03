@@ -1,0 +1,184 @@
+﻿{
+  "Parameters": {
+    "RootCertFileName": {
+      "Type": "string",
+      "Description": "The file name of the root certificate to be created.",
+      "DefaultValue": "SitecoreRootCert"
+    },
+    "CertPath": {
+      "Type": "string",
+      "Description": "The physical path on disk where certificates will be stored.",
+      "DefaultValue": "c:\\certificates"
+    },
+    "CommerceServicesDbServer": {
+      "Type": "string",
+      "Description": "Commerce Engine database server name",
+      "DefaultValue": ""
+    },
+    "CommerceServicesDbName": {
+      "Type": "string",
+      "Description": "Commerce Services database name",
+      "DefaultValue": ""
+    },
+    "CommerceServicesGlobalDbName": {
+      "Type": "string",
+      "Description": "Commerce Services Global database name",
+      "DefaultValue": ""
+    },
+    "CommerceServicesArchiveDbName": {
+      "Type": "string",
+      "Description": "The Commerce Engine Archive database name.",
+      "DefaultValue": ""
+    },
+    "CommerceServicesHostPostfix": {
+      "Type": "string",
+      "Description": "The postfix for Commerce Engine services host names",
+      "DefaultValue": ""
+    },
+    "SitecoreDbServer": {
+      "Type": "string",
+      "Description": "Sitecore database server name",
+      "DefaultValue": ""
+    },
+    "SitecoreCoreDbName": {
+      "Type": "string",
+      "Description": "Sitecore Core database name",
+      "DefaultValue": ""
+    },
+    "SqlAdminUser": {
+      "Type": "string",
+      "Description": "The Sql admin user.",
+      "DefaultValue": ""
+    },
+    "SqlAdminPassword": {
+      "Type": "string",
+      "Description": "The Sql admin password.",
+      "DefaultValue": ""
+    },
+    "UserDomain": {
+      "Type": "string",
+      "Description": "User Domain",
+      "DefaultValue": "$env:COMPUTERNAME"
+    },
+    "UserName": {
+      "Type": "string",
+      "Description": "User Name for Commerce Services App Pool",
+      "DefaultValue": ""
+    },
+    "UserPassword": {
+      "Type": "string",
+      "Description": "User Password for Commerce Services App Pool",
+      "DefaultValue": ""
+    },
+    "EnvironmentsGuids": {
+      "Type": "string[]",
+      "Description": "List of environments guids.",
+      "DefaultValue": "[]"
+    },
+    "RedisCliPath": {
+      "Type": "string",
+      "Description": "Path to redis-cli executable.",
+      "DefaultValue": ""
+    },
+    "RedisHost": {
+      "Type": "string",
+      "Description": "The host name where Redis is hosted.",
+      "DefaultValue": ""
+    },
+    "RedisPort": {
+      "Type": "string",
+      "Description": "The port number on which Redis is running.",
+      "DefaultValue": ""
+    }
+  },
+  "Settings": {
+    "AutoRegisterExtensions": true
+  },
+  "Modules": [
+    "DeployCommerceDatabase",
+    "WindowsLocal",
+    "SitecoreUtilityTasks"
+  ],
+  "Variables": {
+    "Root.Cert.DnsName": "[concat('DO_NOT_TRUST_', parameter('RootCertFileName'))]",
+    "Root.Cert.Store": "cert:\\LocalMachine\\Root",
+    "Client.Cert.Store": "cert:\\LocalMachine\\My",
+    "SecureSqlAdminPassword": "[ConvertToSecureString(String:parameter('SqlAdminPassword'),AsPlainText:true,Force:true)]"
+  },
+  "Tasks": {
+    "ClearRedis": {
+      "Type": "ClearRedis",
+      "Params": {
+        "RedisCliPath": "[parameter('RedisCliPath')]",
+        "RedisHost": "[parameter('RedisHost')]",
+        "RedisPort": "[parameter('RedisPort')]",
+        "EnvironmentsGuids": "[parameter('EnvironmentsGuids')]"
+      }
+    },
+    "CreateSignedCert": {
+      "Skip": "[not(parameter('CommerceServicesHostPostfix'))]",
+      "Type": "NewSignedCertificate",
+      "Params": {
+        "Signer": "[GetCertificate(variable('Root.Cert.DnsName'), variable('Root.Cert.Store'))]",
+        "Path": "[parameter('CertPath')]",
+        "FriendlyName": "Commerce Engine SSL Certificate",
+        "CertStoreLocation": "[variable('Client.Cert.Store')]",
+        "Name": "Commerce Engine SSL Certificate",
+        "DnsName": "[concat('*.', parameter('CommerceServicesHostPostfix'))]",
+        "IncludePrivateKey": true
+      }
+    },
+    "CreateLocalhostSignedCert": {
+      "Type": "NewCommerceSignedCertificate",
+      "Params": {
+        "Signer": "[GetCertificate(variable('Root.Cert.DnsName'), variable('Root.Cert.Store'))]",
+        "Path": "[parameter('CertPath')]",
+        "FriendlyName": "Commerce Engine SSL Localhost Certificate",
+        "CertStoreLocation": "[variable('Client.Cert.Store')]",
+        "Name": "localhost",
+        "DnsName": "localhost"
+      }
+    },
+    "EnsureLocalUser": {
+      "Type": "EnsureLocalUser",
+      "Params": {
+        "UserDomain": "[parameter('UserDomain')]",
+        "UserName": "[parameter('UserName')]",
+        "UserPassword": "[parameter('UserPassword')]"
+      }
+    },
+    "AddCommerceUserToCoreDatabase": {
+      "Type": "AddCommerceUserToCoreDatabase",
+      "Params": {
+        "SitecoreDbServer": "[parameter('SitecoreDbServer')]",
+        "SitecoreCoreDbName": "[parameter('SitecoreCoreDbName')]",
+        "UserName": "[concat(parameter('UserDomain'), concat('\\', parameter('UserName')))]"
+      }
+    }
+  },
+  "UninstallTasks": {
+    "ClearRedis": {
+      "Type": "ClearRedis",
+      "Params": {
+        "RedisCliPath": "[parameter('RedisCliPath')]",
+        "RedisHost": "[parameter('RedisHost')]",
+        "RedisPort": "[parameter('RedisPort')]",
+        "EnvironmentsGuids": "[parameter('EnvironmentsGuids')]"
+      }
+    },
+    "RemoveDatabases": {
+      "Description": "Removes Commerce Engine Databases.",
+      "Type": "RemoveSQLDatabase",
+      "Params": {
+        "ServerName": "[replace(parameter('CommerceServicesDbServer'), '\\\\', '\\')]",
+        "Username": "[parameter('SqlAdminUser')]",
+        "Password": "[variable('SecureSqlAdminPassword')]",
+        "DatabaseName": [
+          "[parameter('CommerceServicesDbName')]",
+          "[parameter('CommerceServicesGlobalDbName')]",
+          "[parameter('CommerceServicesArchiveDbName')]"
+        ]
+      }
+    }
+  }
+}

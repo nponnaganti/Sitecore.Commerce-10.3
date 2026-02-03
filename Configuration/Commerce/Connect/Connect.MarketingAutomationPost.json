@@ -1,0 +1,56 @@
+{
+  "Parameters": {
+    "XConnectInstallDir": {
+      "Type": "string",
+      "Description": "The path to the XConnect web site.",
+      "DefaultValue": ""
+    },
+    "AutomationEngineModule": {
+      "Type": "string",
+      "Description": "The path to the Commerce Automation Engine zip.",
+      "DefaultValue": ""
+    },
+    "MAEnginePrefix": {
+      "Type": "string",
+      "Description": "The prefix to match Marketing Automation engine service name. Used in form <MAEnginePrefix>_xconnect-MarketingAutomationService.",
+      "DefaultValue": ""
+    }
+  },
+  "Variables": {
+    "Automation.EngineModule": "[parameter('AutomationEngineModule')]",
+    "Services.MarketingAutomationEngine.Name": "[concat(parameter('MAEnginePrefix'), '_xconnect-MarketingAutomationService')]"
+  },
+  "Modules": [
+    "SitecoreUtilityTasks"
+  ],
+  "Tasks": {
+    "StopServices": {
+      "Description": "Stops the services if they running.",
+      "Type": "ManageService",
+      "Params": [
+        {
+          "Name": "[variable('Services.MarketingAutomationEngine.Name')]",
+          "Status": "Stopped",
+          "PostDelay": 3000
+        }
+      ]
+    },
+    "InstallAutomationEngineModule": {
+      "Type": "ExpandArchive",
+      "Params": {
+        "SourceZip": "[variable('Automation.EngineModule')]",
+        "DestinationPath": "[parameter('XConnectInstallDir')]"
+      }
+    },
+    "StartServices": {
+      "Description": "Starts the service.",
+      "Type": "ManageService",
+      "Params": [
+        {
+          "Name": "[variable('Services.MarketingAutomationEngine.Name')]",
+          "Status": "Running"
+        }
+      ]
+    }
+  }
+}

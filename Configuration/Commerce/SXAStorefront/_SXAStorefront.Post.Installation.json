@@ -1,0 +1,37 @@
+{
+  "Parameters": {
+    "MergeToolFullPath": {
+      "Type": "string",
+      "Description": "The path to the Merge Tool.",
+      "DefaultValue":""
+    },
+    "InstallDir": {
+      "Type": "string",
+      "Description": "The sitecore site content path.",
+      "DefaultValue": ""
+    },
+    "SkipTask": {
+      "Type": "bool",
+      "Description": "Boolean value to indicate whether task should be skipped or not.",
+      "DefaultValue": false
+    }
+  },
+  "Variables": {
+    "InputFile": "[concat(parameter('InstallDir'), '\\MergeFiles\\Merge.SXA.Storefront.config')]",
+    "WebConfig": "[concat(parameter('InstallDir'), '\\Web.Config')]"
+  },
+  "Modules": [
+    "MergeWebConfig"
+  ],
+  "Tasks": {
+    "MergeWebConfig": {
+      "Skip": "[parameter('SkipTask')]",
+      "Type": "MergeWebConfig",
+      "Params": {
+        "MergeTool": "[parameter('MergeToolFullPath')]",
+        "InputFile": "[variable('InputFile')]",
+        "WebConfig": "[variable('WebConfig')]"
+      }
+    }
+  }
+}
