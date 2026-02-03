@@ -13,3 +13,4 @@ Write-Host $newClientSecret -ForegroundColor Yellow
 ------------------------------------------------------------------------------------------------
 New Client Secret:WsGZZ/WD+UaJwrj18JW0O8DtLnYPbvepA1LuVrghQgk=
 ------------------------------------------------------------------------------------------------
+https://github.com/microsoftarchive/redis/releases/tag/win-3.0.504
