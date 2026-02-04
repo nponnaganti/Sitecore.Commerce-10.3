@@ -14,3 +14,12 @@ Write-Host $newClientSecret -ForegroundColor Yellow
 New Client Secret:WsGZZ/WD+UaJwrj18JW0O8DtLnYPbvepA1LuVrghQgk=
 ------------------------------------------------------------------------------------------------
 https://github.com/microsoftarchive/redis/releases/tag/win-3.0.504
+C:\Program Files\Redis\
+port:6379
+PS C:\WINDOWS\system32> cd "C:\Program Files\Redis"
+PS C:\Program Files\Redis> redis-cli -h localhost -p 6379 ping
+PONG
+PS C:\Program Files\Redis>
+------------------------------------------------------------------------------------------------
+https://sandbox.braintreegateway.com/
+------------------------------------------------------------------------------------------------

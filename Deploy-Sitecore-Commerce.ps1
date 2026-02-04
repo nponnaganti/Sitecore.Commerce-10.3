@@ -1,7 +1,7 @@
 #Requires -Version 3
 param(
     # The root folder with WDP files.
-    [string]$XCInstallRoot = "..",
+    [string]$XCInstallRoot = "C:\SitecoreCommerce\Sitecore.Commerce-10.3",
     # The root folder of SIF.Sitecore.Commerce package.
     [string]$XCSIFInstallRoot = $PWD,
     # Specifies whether or not to bypass the installation of the default SXA Storefront. By default, the Sitecore XC installation script also deploys the SXA Storefront.
@@ -48,33 +48,33 @@ param(
     [string]$HabitatImagesWdpFullPath = "$XCInstallRoot\Sitecore.Commerce.Habitat.Images.OnPrem.scwdp.zip",
 
     # The prefix that will be used on SOLR, Website and Database instances. The default value matches the Sitecore XP default.
-    [string]$SiteNamePrefix = "XP0",
+    [string]$SiteNamePrefix = "test103",
     # The prefix to match Marketing Automation engine service name. Used in form "<MAEnginePrefix>_xconnect-MarketingAutomationService".
     [string]$MAEnginePrefix = $SiteNamePrefix,
     # The name of the Sitecore site instance.
-    [string]$SiteName = "$SiteNamePrefix.sc",
+    [string]$SiteName = "test103sc.dev.local",
     # Identity Server site name.
-    [string]$IdentityServerSiteName = "$SiteNamePrefix.IdentityServer",
+    [string]$IdentityServerSiteName = "test103identityserver.dev.local",
     # The url of the Sitecore Identity server.
     [string]$SitecoreIdentityServerUrl = "https://$IdentityServerSiteName",
     # The Commerce Engine Connect Client Id for the Sitecore Identity Server
     [string]$CommerceEngineConnectClientId = "CommerceEngineConnect",
     # The Commerce Engine Connect Client Secret for the Sitecore Identity Server
-    [string]$CommerceEngineConnectClientSecret = "",
+    [string]$CommerceEngineConnectClientSecret = "WsGZZ/WD+UaJwrj18JW0O8DtLnYPbvepA1LuVrghQgk=",
     # The host header name for the Sitecore storefront site.
     [string]$SiteHostHeaderName = "sxa.storefront.com",
 
     # The path of the Sitecore XP site.
-    [string]$InstallDir = "$($Env:SYSTEMDRIVE)\inetpub\wwwroot\$SiteName",
+    [string]$InstallDir = "C:\inetpub\wwwroot\test103sc.dev.local",
     # The path of the Sitecore XConnect site.
-    [string]$XConnectInstallDir = "$($Env:SYSTEMDRIVE)\inetpub\wwwroot\$SiteNamePrefix.xconnect",
+    [string]$XConnectInstallDir = "C:\inetpub\wwwroot\test103xconnect.dev.local",
     # The path to the inetpub folder where Commerce is installed.
-    [string]$CommerceInstallRoot = "$($Env:SYSTEMDRIVE)\inetpub\wwwroot\",
+    [string]$CommerceInstallRoot = "C:\inetpub\wwwroot\",
 
     # The prefix for Sitecore core and master databases.
     [string]$SqlDbPrefix = $SiteNamePrefix,
-    # The location of the database server where Sitecore XP databases are hosted. In case of named SQL instance, use "SQLServerName\\SQLInstanceName"
-    [string]$SitecoreDbServer = $($Env:COMPUTERNAME),
+    # The location of the database server where Sitecore XP databases are hosted. $($Env:COMPUTERNAME) In case of named SQL instance, use "SQLServerName\\SQLInstanceName"
+    [string]$SitecoreDbServer = "(local)\\SQLEXPRESS2022",
     # The name of the Sitecore core database.
     [string]$SitecoreCoreDbName = "$($SqlDbPrefix)_Core",
     # A SQL user with sysadmin privileges.
@@ -92,11 +92,11 @@ param(
     # The prefix for the Search index. Using the SiteNamePrefix value for the prefix is recommended.
     [string]$SearchIndexPrefix = $SiteNamePrefix,
     # The URL of the Solr Server.
-    [string]$SolrUrl = "https://localhost:8983/solr",
+    [string]$SolrUrl = "https://localhost:9026/solr",
     # The folder that Solr has been installed to.
-    [string]$SolrRoot = "$($Env:SYSTEMDRIVE)\solr-8.11.2",
+    [string]$SolrRoot = "$($Env:SYSTEMDRIVE)\solr\solr-8.1.1\xp103solr-8.11.2",
     # The name of the Solr Service.
-    [string]$SolrService = "solr-8.11.2",
+    [string]$SolrService = "xp103solr-8.11.2",
     # The prefix for the Storefront index. The default value is the SiteNamePrefix.
     [string]$StorefrontIndexPrefix = $SiteNamePrefix,
 
@@ -110,7 +110,7 @@ param(
     [string]$RedisCliPath = "$($Env:SYSTEMDRIVE)\Program Files\Redis\redis-cli.exe",
 
     # The location of the database server where Commerce databases should be deployed. In case of named SQL instance, use "SQLServerName\\SQLInstanceName"
-    [string]$CommerceServicesDbServer = $($Env:COMPUTERNAME),
+    [string]$CommerceServicesDbServer = "(local)\\SQLEXPRESS2022",
     # The name of the shared database for the Commerce Services.
     [string]$CommerceServicesDbName = "SitecoreCommerce_SharedEnvironments",
     # The name of the global database for the Commerce Services.
@@ -157,14 +157,15 @@ param(
     # The password for the $UserName.
     [string]$UserPassword = "q5Y8tA3FRMZf3xKN!",
 
+    #pick the values from sandbox.braintreegateway.com
     # The Braintree Merchant Id.
-    [string]$BraintreeMerchantId = "",
+    [string]$BraintreeMerchantId = "h9k3m2p8xw7r5zq1",
     # The Braintree Public Key.
-    [string]$BraintreePublicKey = "",
+    [string]$BraintreePublicKey = "a4f7d9k2m6x8p3wq",
     # The Braintree Private Key.
-    [string]$BraintreePrivateKey = "",
+    [string]$BraintreePrivateKey = "8f2c9d1b7e4a6c5d3f0e9a8b2c1d4e7a",
     # The Braintree Environment.
-    [string]$BraintreeEnvironment = "",
+    [string]$BraintreeEnvironment = "sandbox",
 
     # List of comma-separated task names to skip during Sitecore XC deployment.
     [string]$TasksToSkip = ""
