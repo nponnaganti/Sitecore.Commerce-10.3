@@ -17,7 +17,7 @@ param(
     # Path to the SiteUtilityPages folder provided as part of the SIF.Sitecore.Commerce package.
     [string]$SiteUtilitiesSrc = "$XCSIFInstallRoot\SiteUtilityPages",
     # Path to the location where you downloaded the Microsoft.Web.XmlTransform.dll file.
-    [string]$MergeToolFullPath = "$XCInstallRoot\MSBuild.Microsoft.VisualStudio.Web.targets*\tools\VSToolsPath\Web\Microsoft.Web.XmlTransform.dll",
+    [string]$MergeToolFullPath = "$XCInstallRoot\Microsoft.Web.XmlTransform.dll",
     # Path to the Adventure Works Images.OnPrem SCWDP file
     [string]$AdventureWorksImagesWdpFullPath = "$XCInstallRoot\Adventure Works Images.OnPrem.scwdp.zip",
     # Path to the Sitecore Commerce Connect Core SCWDP file.
