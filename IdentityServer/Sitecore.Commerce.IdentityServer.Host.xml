@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Settings>
   <Sitecore>
     <IdentityServer>
@@ -24,7 +24,11 @@
             <PostLogoutRedirectUri1>{AllowedCorsOrigin}</PostLogoutRedirectUri1>
           </PostLogoutRedirectUris>
           <AllowedCorsOrigins>
-            <AllowedCorsOriginsGroup1></AllowedCorsOriginsGroup1>
+            <AllowedCorsOriginsGroup1>https://localhost:4200|https://localhost:5000</AllowedCorsOriginsGroup1>
+            <AllowedCorsOriginsGroup2>https://bizfx.sc.com|https://commerceauthoring.sc.com</AllowedCorsOriginsGroup2>
+            <AllowedCorsOriginsGroup2>https://bizfx.sc.com|https://commerceauthoring.sc.com</AllowedCorsOriginsGroup2>
+            <AllowedCorsOriginsGroup2>https://bizfx.sc.com|https://commerceauthoring.sc.com</AllowedCorsOriginsGroup2>
+            <AllowedCorsOriginsGroup2>https://bizfx.sc.com|https://commerceauthoring.sc.com</AllowedCorsOriginsGroup2>
           </AllowedCorsOrigins>
           <AllowedScopes>
             <AllowedScope1>openid</AllowedScope1>
@@ -58,7 +62,7 @@
             <PostLogoutRedirectUri1>{AllowedCorsOrigin}</PostLogoutRedirectUri1>
           </PostLogoutRedirectUris>
           <AllowedCorsOrigins>
-            <AllowedCorsOriginsGroup1></AllowedCorsOriginsGroup1>
+            <AllowedCorsOriginsGroup1>https://test103sc.dev.local|http://test103sc.dev.local|https://sxa.storefront.com|http://sxa.storefront.com</AllowedCorsOriginsGroup1>
           </AllowedCorsOrigins>
           <AllowedScopes>
             <AllowedScope1>openid</AllowedScope1>
@@ -68,7 +72,7 @@
           </AllowedScopes>
           <UpdateAccessTokenClaimsOnRefresh>true</UpdateAccessTokenClaimsOnRefresh>
           <ClientSecrets>
-            <ClientSecret1>K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols=</ClientSecret1>
+            <ClientSecret1>WsGZZ/WD+UaJwrj18JW0O8DtLnYPbvepA1LuVrghQgk=</ClientSecret1>
           </ClientSecrets>
         </CommerceEngineConnectClient>
         <PostmanClient>

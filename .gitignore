@@ -1,0 +1,26 @@
+/Deploy-Sitecore-Commerce.ps1
+/XC-Install.log
+/success-logs.txt
+
+/Adventure Works Images.OnPrem.scwdp.zip
+/SIF.Sitecore.Commerce.8.0.14.zip
+/Sitecore Commerce Connect Core OnPrem 18.0.13.scwdp.zip
+/Sitecore Commerce Connect Schema Definitions for IndexWorker OnPrem 18.0.13.scwdp.zip
+/Sitecore Commerce Connect Schema Definitions for xConnect OnPrem 18.0.13.scwdp.zip
+/Sitecore Commerce Engine Connect OnPrem 9.0.18.scwdp.zip
+/Sitecore Commerce Experience Accelerator 8.0.20.scwdp.zip
+/Sitecore Commerce Experience Accelerator Habitat Catalog 8.0.20.scwdp.zip
+/Sitecore Commerce Experience Accelerator Storefront 8.0.20.scwdp.zip
+/Sitecore Commerce Experience Accelerator Storefront Themes 8.0.20.scwdp.zip
+/Sitecore Commerce ExperienceAnalytics Core OnPrem 18.0.13.scwdp.zip
+/Sitecore Commerce ExperienceProfile Core OnPrem 18.0.13.scwdp.zip
+/Sitecore Commerce Marketing Automation Core OnPrem 18.0.13.scwdp.zip
+/Sitecore Commerce Marketing Automation for AutomationEngine 18.0.13.zip
+/Sitecore Commerce Marketing Automation Scaled 18.0.13.scwdp.zip
+/Sitecore.BizFx.OnPrem.8.0.5.scwdp.zip
+/Sitecore.BizFX.SDK.8.0.5.zip
+/Sitecore.Commerce.Engine.OnPrem.Solr.9.0.82.scwdp.zip
+/Sitecore.Commerce.Engine.SDK.9.0.16.zip
+/Sitecore.Commerce.Habitat.Images.OnPrem.scwdp.zip
+/Sitecore.Identity.Config.Commerce.8.0.14.scwdp.zip
+/SolrSchemas.Sitecore.Commerce.8.0.14.zip

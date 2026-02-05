@@ -1,7 +1,10 @@
 dotnet add package MSBuild.Microsoft.VisualStudio.Web.targets --version 14.0.0.3
 Option 2: Manual download (no NuGet CLI) -- refer: 03-downloadMicrosoft.Web.XmlTransform-dll.PNG
 https://nuget.info/packages/MSBuild.Microsoft.VisualStudio.Web.targets/14.0.0.3
+Updated line no :20 for [string]$MergeToolFullPath = "$XCInstallRoot\Microsoft.Web.XmlTransform.dll"
 ------------------------------------------------------------------------------------------------
+Get-ChildItem "C:\SitecoreCommerce\Sitecore.Commerce-10.3" -Recurse | Unblock-File
+Unblock-File "C:\SitecoreCommerce\Sitecore.Commerce-10.3\Microsoft.Web.XmlTransform.dll"
 -----------------Create a secret client certificate---------------------------------------------
 $bytes = New-Object Byte[] 32
 $rand = [System.Security.Cryptography.RandomNumberGenerator]::Create()
@@ -23,5 +26,30 @@ PS C:\Program Files\Redis>
 ------------------------------------------------------------------------------------------------
 https://sandbox.braintreegateway.com/
 ------------------------------------------------------------------------------------------------
-Updated line no :20 for [string]$MergeToolFullPath = "$XCInstallRoot\Microsoft.Web.XmlTransform.dll"
-------------------------------------------------------------------------------------------------
+VERBOSE: Resolving ConfigFunction extension 'concat'
+VERBOSE: Resolved 'Invoke-ConcatConfigFunction'
+VERBOSE: Invoke-ConcatConfigFunction
+VERBOSE: Concatenating: http://sxa.storefront.com/SiteUtilityPages /Publish.aspx
+VERBOSE: Result: http://sxa.storefront.com/SiteUtilityPages/Publish.aspx
+VERBOSE: Performing the operation "Requesting" on target "http://sxa.storefront.com/SiteUtilityPages/Publish.aspx".
+[Publish-Commerce_PublishToWeb]:[Requesting] http://sxa.storefront.com/SiteUtilityPages/Publish.aspx
+[----------------------------- RebuildIndexes_RebuildIndex-Core : WebRequest --------------------------------------]
+VERBOSE: Resolving ConfigFunction extension 'concat'
+VERBOSE: Resolved 'Invoke-ConcatConfigFunction'
+VERBOSE: Invoke-ConcatConfigFunction
+VERBOSE: Concatenating: http://sxa.storefront.com/SiteUtilityPages /RebuildIndex.aspx?index=sitecore_core_index
+VERBOSE: Result: http://sxa.storefront.com/SiteUtilityPages/RebuildIndex.aspx?index=sitecore_core_index
+VERBOSE: Performing the operation "Requesting" on target
+VERBOSE: "http://sxa.storefront.com/SiteUtilityPages/RebuildIndex.aspx?index=sitecore_core_index".
+[RebuildIndexes_RebuildIndex-Core]:[Requesting]
+http://sxa.storefront.com/SiteUtilityPages/RebuildIndex.aspx?index=sitecore_core_index
+VERBOSE: GET with 0-byte payload
+http://sxa.storefront.com/SiteUtilityPages/RebuildIndex.aspx?index=sitecore_web_index
+---------------------------------------------------------------------------------------------------------------
+"Module-HabitatImages": {
+            "Source": ".\\Configuration\\Commerce\\Common\\Common.InstallWdpModule.json"
+        },
+        "Module-AdventureWorksImages": {
+            "Source": ".\\Configuration\\Commerce\\Common\\Common.InstallWdpModule.json"
+        },
+---------------------------------------------------------------------------------------------------------------
